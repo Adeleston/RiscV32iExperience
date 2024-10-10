@@ -19,5 +19,5 @@ always @(*) begin
 		end
 	end
 end
-end module
+endmodule
 		
