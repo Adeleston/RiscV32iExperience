@@ -2,8 +2,8 @@ module alu (
     input   wire        [31:0] a,    //reg koyarsam bi pipeline aşaması daha çıkar
     input   wire        [31:0] b,
     input   wire        [4:0] ALUctr,
-    output  wire        less,
-    output  wire        zero,
+    //output  wire        less,
+    //output  wire        zero,
     output  reg         [31:0] result 
     );
     
