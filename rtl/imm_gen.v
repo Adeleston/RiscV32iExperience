@@ -12,7 +12,7 @@ module imm_gen (
                 3'b000: i_imm = {{21{inst[31]}}, inst[30:20]};                                             
                 3'b001: b_imm = {{20{inst[31]}}, inst[7], inst[30:25], inst[11:8], 1'b0};            //1'b0 hizalama biti           
                 3'b010: j_imm = {{12{inst[31]}}, inst[19:12], inst[20], inst[30:25], inst[24:21], 1'b0};      
-                3'b011: s_imm = {{20{inst[31]}}, inst[31:25], inst[11:7]};                    
+                3'b011: s_imm = {{21{inst[31]}}, inst[30:25], inst[11:7]};                    
                 3'b100: ii_imm = {inst[31:12], 12'b0};                                 
                 default: begin
                     i_imm = 32'b0;
