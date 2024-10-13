@@ -58,6 +58,7 @@ module data_memory(
                     data_mem[data_mem_address+1]<=data_mem_input[15:8];
                 if (MemOP[2])// Write the third and fourth bytes if it is Word
                     begin
+                        data_mem[data_mem_address+1]<=data_mem_input[15:8];
                         data_mem[data_mem_address+2]<=data_mem_input[23:16];
                         data_mem[data_mem_address+3]<=data_mem_input[31:24];
                     end
