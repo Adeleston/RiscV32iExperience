@@ -21,7 +21,7 @@ module reg_file(
     assign rs1 = register[Ra];
     assign rs2 = register[Rb];
     
-    always @(posedge Wr_Clk) begin
+    always @(negedge Wr_Clk) begin
         if (RegWr && (Rw != 0))
             register[Rw] <= busW;
         end
