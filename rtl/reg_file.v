@@ -7,15 +7,17 @@ module reg_file(
     output [31:0] rs2
     );
 
-    reg [4:0] Ra;
-    reg [4:0] Rb;
-    reg [4:0] Rw;
+    wire [4:0] Ra = inst[19:15];
+    wire [4:0] Rb = inst[24:20];
+    wire [4:0] Rw = inst[11:7];
+
     reg [31:0] register [31:0];
-    
-    always@(*) begin
-        Ra = inst[19:15]; 
-        Rb = inst[24:20]; 
-        Rw = inst[11:7];  
+
+    integer i;
+    initial begin
+        for (i = 0; i < 32; i = i + 1) begin
+            register[i] = 32'b0;
+        end
     end
     
     assign rs1 = register[Ra];
@@ -24,6 +26,6 @@ module reg_file(
     always @(negedge Wr_Clk) begin
         if (RegWr && (Rw != 0))
             register[Rw] <= busW;
-        end
-    
+    end
+
 endmodule
