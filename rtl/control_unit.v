@@ -61,7 +61,7 @@ module control_unit(
                 ALUASrc = 1'b1;
                 ALUBSrc = 2'b00;
                 ExtOp = 3'b001;
-                imm_out = {{20{inst[31]}}, inst[30:20]};
+                imm = {{20{inst[31]}}, inst[30:20]};
                 case(imm)
                     3'b000: ALUCtr = 5'b00000;//addi
                     3'b010: ALUCtr = 5'b00010;//slti
@@ -85,7 +85,7 @@ module control_unit(
                 MemWr = 1'b1;
                 MemOp = func3;
                 ExtOp = 3'b001;
-                imm_out = {{21{inst[31]}}, inst[30:25], inst[11:7]};
+                imm = {{21{inst[31]}}, inst[30:25], inst[11:7]};
                     case (func3)
                         3'b000: MemOp = 3'b000;//sb
                         3'b001: MemOp = 3'b010;//sh
