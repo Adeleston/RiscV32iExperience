@@ -8,7 +8,8 @@ module control_unit(
     output reg Branch,
     output reg MemtoReg,
     output reg MemWr,
-    output reg [2:0] MemOp       
+    output reg [2:0] MemOp,
+    output reg jump
 );
     reg [31:0] imm;
 
