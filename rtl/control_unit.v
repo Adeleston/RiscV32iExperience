@@ -111,19 +111,19 @@ module control_unit(
                 ALUCtr = 5'b00000; //rs1+imm
             end
 
-            7'b1100011: begin //b-type
+            7'b1100011: begin //b-type ??
                 ALUASrc = 1'b0;
                 ALUBSrc = 2'b00;
                 Branch = 1'b1;
                 ExtOp = 3'b001;
                 imm = {{20{inst[31]}}, inst[7], inst[30:25], inst[11:8], 1'b0};
                 case(func3)
-                    3'b000: ALUCtr = 5'b01010;//beq
-                    3'b001: ALUCtr = 5'b01011;//bne
-                    3'b100: ALUCtr = 5'b01100;//blt
-                    3'b101: ALUCtr = 5'b01101;//bge
-                    3'b110: ALUCtr = 5'b01110;//bltu
-                    3'b111: ALUCtr = 5'b01111;//bgeu
+                    3'b000: ALUCtr = 5'b10100;//beq
+                    3'b001: ALUCtr = 5'b10101;//bne
+                    3'b100: ALUCtr = 5'b10110;//blt
+                    3'b101: ALUCtr = 5'b10111;//bge
+                    3'b110: ALUCtr = 5'b11000;//bltu
+                    3'b111: ALUCtr = 5'b11001;//bgeu
                 endcase
             end
 
