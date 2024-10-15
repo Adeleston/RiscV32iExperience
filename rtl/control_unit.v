@@ -131,6 +131,7 @@ module control_unit(
                 RegWr = 1'b1;
                 ALUASrc = 1'b1;
                 ALUBSrc = 2'b00;
+                Branch = 1'b1;
                 ExtOp = 3'b000;
                 imm = {{20{inst[31]}}, inst[30:20]};
                 ALUCtr = 5'b00000;
@@ -140,6 +141,7 @@ module control_unit(
                 RegWr = 1'b1;
                 ALUASrc = 1'b0;
                 ALUBSrc = 2'b10;
+                Branch = 1'b1;
                 ExtOp = 3'b010;
                 imm = {{12{inst[31]}}, inst[19:12], inst[20], inst[30:25], inst[24:21], 1'b0};
                 ALUCtr = 5'b00000; // pc + imm
