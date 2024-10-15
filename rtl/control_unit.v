@@ -37,20 +37,20 @@ module control_unit(
                     7'b0000000:begin
                         case(func3)
                         3'b000: ALUCtr = 5'b00000;//add
-                        3'b001: ALUCtr = 5'b00001;//sll
-                        3'b010: ALUCtr = 5'b00010;//slt
-                        3'b011: ALUCtr = 5'b00011;//sltu
-                        3'b100: ALUCtr = 5'b00100;//xor
-                        3'b101: ALUCtr = 5'b00101;//srl
-                        3'b110: ALUCtr = 5'b00110;//or
-                        3'b111: ALUCtr = 5'b00111;//and
+                        3'b001: ALUCtr = 5'b00010;//sll
+                        3'b010: ALUCtr = 5'b00011;//slt
+                        3'b011: ALUCtr = 5'b00100;//sltu
+                        3'b100: ALUCtr = 5'b00101;//xor
+                        3'b101: ALUCtr = 5'b00110;//srl
+                        3'b110: ALUCtr = 5'b01000;//or
+                        3'b111: ALUCtr = 5'b01001;//and
                         endcase
                     end
 
                     7'b0100000: begin
                         case (func3)
-                        3'b000: ALUCtr = 5'b01000;//sub
-                        3'b101: ALUCtr = 5'b01001;//sra
+                        3'b000: ALUCtr = 5'b00001;//sub
+                        3'b101: ALUCtr = 5'b00111;//sra
                         endcase
                     end
                 endcase
@@ -63,17 +63,17 @@ module control_unit(
                 ExtOp = 3'b000;
                 imm = {{20{inst[31]}}, inst[30:20]};
                 case(func3)
-                    3'b000: ALUCtr = 5'b00000;//addi
-                    3'b010: ALUCtr = 5'b00010;//slti
-                    3'b011: ALUCtr = 5'b00011;//sltiu
-                    3'b100: ALUCtr = 5'b00100;//xori
-                    3'b110: ALUCtr = 5'b00110;//ori
-                    3'b111: ALUCtr = 5'b00111;//andi
-                    3'b001: ALUCtr = 5'b00001;//slli
+                    3'b000: ALUCtr = 5'b01010;//addi
+                    3'b010: ALUCtr = 5'b01011;//slti
+                    3'b011: ALUCtr = 5'b01100;//sltiu
+                    3'b100: ALUCtr = 5'b01101;//xori
+                    3'b110: ALUCtr = 5'b01110;//ori
+                    3'b111: ALUCtr = 5'b01111;//andi
+                    3'b001: ALUCtr = 5'b10001;//slli
                     3'b101:begin
                         case(func7)
-                            7'b0000000: ALUCtr = 5'b00101;//srli
-                            7'b0100000: ALUCtr = 5'b01001;//sraı
+                            7'b0000000: ALUCtr = 5'b10010;//srli
+                            7'b0100000: ALUCtr = 5'b10011;//sraı
                         endcase
                     end
                 endcase
