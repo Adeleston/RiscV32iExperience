@@ -88,8 +88,8 @@ module control_unit(
                 imm_out = {{21{inst[31]}}, inst[30:25], inst[11:7]};
                     case (func3)
                         3'b000: MemOp = 3'b000;//sb
-                        3'b001: MemOp = 3'b001;//sh
-                        3'b010: MemOp = 3'b010;//sw
+                        3'b001: MemOp = 3'b010;//sh
+                        3'b010: MemOp = 3'b100;//sw
                     endcase
                 ALUCtr = 5'b00000; //rs1+imm
             end
@@ -103,10 +103,10 @@ module control_unit(
                 imm_out = {{20{inst[31]}}, inst[30:20]};
                     case(func3)
                     3'b000: MemOp = 3'b000;//lb
-                    3'b001: MemOp = 3'b001;//lh
-                    3'b010: MemOp = 3'b010;//lw
-                    3'b100: MemOp = 3'b011;//lbu
-                    3'b101: MemOp = 3'b100;//lhu
+                    3'b001: MemOp = 3'b010;//lh
+                    3'b010: MemOp = 3'b100;//lw
+                    3'b100: MemOp = 3'b001;//lbu
+                    3'b101: MemOp = 3'b011;//lhu
                     endcase
                 ALUCtr = 5'b00000; //rs1+imm
             end
