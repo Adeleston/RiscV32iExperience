@@ -60,9 +60,9 @@ module control_unit(
                 RegWr = 1'b1;
                 ALUASrc = 1'b1;
                 ALUBSrc = 2'b00;
-                ExtOp = 3'b001;
+                ExtOp = 3'b000;
                 imm = {{20{inst[31]}}, inst[30:20]};
-                case(imm)
+                case(func3)
                     3'b000: ALUCtr = 5'b00000;//addi
                     3'b010: ALUCtr = 5'b00010;//slti
                     3'b011: ALUCtr = 5'b00011;//sltiu
@@ -84,7 +84,7 @@ module control_unit(
                 ALUBSrc = 2'b00;
                 MemWr = 1'b1;
                 MemOp = func3;
-                ExtOp = 3'b001;
+                ExtOp = 3'b011;
                 imm = {{21{inst[31]}}, inst[30:25], inst[11:7]};
                     case (func3)
                         3'b000: MemOp = 3'b000;//sb
@@ -99,7 +99,7 @@ module control_unit(
                 ALUASrc = 1'b1;
                 ALUBSrc = 2'b00;
                 MemtoReg = 1'b1;
-                ExtOp = 3'b001;
+                ExtOp = 3'b000;
                 imm = {{20{inst[31]}}, inst[30:20]};
                     case(func3)
                     3'b000: MemOp = 3'b000;//lb
@@ -115,7 +115,7 @@ module control_unit(
                 ALUASrc = 1'b0;
                 ALUBSrc = 2'b00;
                 Branch = 1'b1;
-                ExtOp = 3'b010;
+                ExtOp = 3'b001;
                 imm = {{20{inst[31]}}, inst[7], inst[30:25], inst[11:8], 1'b0};
                 case(func3)
                     3'b000: ALUCtr = 5'b01010;//beq
@@ -131,7 +131,7 @@ module control_unit(
                 RegWr = 1'b1;
                 ALUASrc = 1'b1;
                 ALUBSrc = 2'b00;
-                ExtOp = 3'b001;
+                ExtOp = 3'b000;
                 imm = {{20{inst[31]}}, inst[30:20]};
                 ALUCtr = 5'b00000;
             end
@@ -140,7 +140,7 @@ module control_unit(
                 RegWr = 1'b1;
                 ALUASrc = 1'b0;
                 ALUBSrc = 2'b10;
-                ExtOp = 3'b011;
+                ExtOp = 3'b010;
                 imm = {{12{inst[31]}}, inst[19:12], inst[20], inst[30:25], inst[24:21], 1'b0};
                 ALUCtr = 5'b00000; // pc + imm
             end
