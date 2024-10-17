@@ -1,3 +1,4 @@
+module Branch_Module(
 input JumpS,
 input [2:0]Branch,
 input Less,
@@ -23,3 +24,4 @@ always @(*) begin
 	           end
 	endcase
 end
+endmodule
