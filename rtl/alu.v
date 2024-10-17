@@ -1,4 +1,5 @@
-input   wire        [31:0] rsA,    //reg koyarsam bi pipeline a?amas? daha ??kar
+module alu (
+    input   wire        [31:0] rsA,    //reg koyarsam bi pipeline a?amas? daha ??kar
     input   wire        [31:0] rsB,
     input   wire        [3:0] ALUctr,
     output  wire        less,
@@ -34,3 +35,4 @@ input   wire        [31:0] rsA,    //reg koyarsam bi pipeline a?amas? daha ??kar
            assign      zero = (result == 0);           
            assign      less = (result[32] == 0);       //sonu? negatif mi
     
+endmodule
