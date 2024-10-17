@@ -1,46 +1,36 @@
-module alu (
-    input   wire        [31:0] rs1,    //reg koyarsam bi pipeline aşaması daha çıkar
-    input   wire        [31:0] rs2,
-    input   wire        [4:0] ALUctr,
+input   wire        [31:0] rsA,    //reg koyarsam bi pipeline a?amas? daha ??kar
+    input   wire        [31:0] rsB,
+    input   wire        [3:0] ALUctr,
     output  wire        less,
     output  wire        zero,
-    output  reg         [31:0] result 
+    output  reg         [32:0] result 
     );
     
-    reg signed [31:0] signed_rs1;
-    reg signed [31:0] signed_rs2;
-
+    reg signed [31:0] signed_rsA;
+    reg signed [31:0] signed_rsB;
+    initial result=0;
     always @(*) begin
-        signed_rs1 = rs1;
-        signed_rs2 = rs2;
+        signed_rsA = rsA;
+        signed_rsB = rsB;
         
         //* signed/unsigned farketmeyenler
 
         case (ALUctr)
-            5'b00000: result =  rs1 + rs2;                                              //add *
-            5'b00001: result =  rs1 - rs2;                                              //sub *
-            5'b00010: result =  rs1 << rs2[4:0];                                        //sll * sola kaydır
-            5'b00011: result = ($signed_rs1 < $signed_rs2) ? 1 : 0;                       //slt signed karşılaştırma
-            5'b00100: result = (rs1 < rs2) ? 1 : 0;                                     //sltu unsigned karşılaştrıma
-            5'b00101: result =  rs1 ^ rs2;                                              //xor *
-            5'b00110: result =  rs1 >> rs2[4:0];                                        //srl sağa kaydır unsigned
-            5'b00111: result =  signed_rs1 >>> rs2[4:0];                                //sra signed sağa kaydır
-            5'b01000: result =  rs1 | rs2;                                              //or *
-            5'b01001: result =  rs1 & rs2;                                              //and *
-            5'b01010: result =  rs1 + {{20{rs2[11]}}, rs2[11:0]};                         //addı *
-            5'b01011: result = ($signed(rs1) < $signed({{20{rs2[11]}}, rs2[11:0]})) ? 1 : 0; // slti signed
-            5'b01100: result = (rs1 < {{20{rs2[11]}}, rs2[11:0]}) ? 1 : 0;                //sltıu
-            5'b01101: result =  rs1 ^ {{20{rs2[11]}}, rs2[11:0]};                         //xorı *
-            5'b01110: result =  rs1 | {{20{rs2[11]}}, rs2[11:0]};                         //orı *
-            5'b01111: result =  rs1 & {{20{rs2[11]}}, rs2[11:0]};                         //andı *
-            5'b10001: result =  rs1 << rs2[4:0];                                        //slli *
-            5'b10010: result =  rs1 >> rs2[4:0];                                        //srli unsigned
-            5'b10011: result =  $signed_rs1 >>> rs2[4:0];                                //srai signed
+            4'b0000: result =  rsA + rsB;                                              //add *
+            4'b0001: result =  rsA - rsB;                                              //sub *
+            4'b0010: result =  rsA << rsB[4:0];                                        //sll * sola kayd?r
+            4'b0011: result = (signed_rsA < signed_rsB) ? 1 : 0;                       //slt signed kar??la?t?rma
+            4'b0100: result = (rsA < rsB) ? 1 : 0;                                     //sltu unsigned kar??la?tr?ma
+            4'b0101: result =  rsA ^ rsB;                                              //xor *
+            4'b0110: result =  rsA >> rsB[4:0];                                        //srl sa?a kayd?r unsigned
+            4'b0111: result =  signed_rsA >>> rsB[4:0];                                //sra signed sa?a kayd?r
+            4'b1000: result =  rsA | rsB;                                              //or *
+            4'b1001: result =  rsA & rsB;                                              //and *
+            4'b1010: result = rsB;                                                   //LUI
             default: result = 32'b0;
         endcase
     end
     
            assign      zero = (result == 0);           
-           assign      less = (result[31] == 1);       //sonuç negatif mi
+           assign      less = (result[32] == 0);       //sonu? negatif mi
     
-endmodule
