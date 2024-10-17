@@ -28,6 +28,7 @@ module control_unit(
         MemtoReg = 1'b0;
         MemWr = 1'b0;
         MemOp = 3'b000;
+        jump = 1'b0;
 
         case(opcode)
             7'b0110011:begin//r-type
@@ -136,6 +137,7 @@ module control_unit(
                 ExtOp = 3'b000;
                 imm = {{20{inst[31]}}, inst[30:20]};
                 ALUCtr = 5'b00000;
+                jump = 1'b1;
             end
 
             7'b1101111:begin //jal
@@ -146,6 +148,7 @@ module control_unit(
                 ExtOp = 3'b010;
                 imm = {{12{inst[31]}}, inst[19:12], inst[20], inst[30:25], inst[24:21], 1'b0};
                 ALUCtr = 5'b00000; // pc + imm
+                jump = 1'b1;
             end
 
             7'b0010111: begin //auıpc
