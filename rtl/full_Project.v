@@ -38,7 +38,7 @@ input wire clk
 	wire [31:0] data_mem_output;
 wire [31:0] Data_out;
 instruction_memory instructmem(.clk(clk),.write_enable(1b'0),.address_inst_mem(nextPc),.data_input(32h'00000000),.data_out(Data_out));
-control_unit cu(.jump(jump),.inst(Data_out),.ExtOp(ExtOp),.RegWr(RegWr),.ALUASrc(ALUASrc),.ALUBSrc(ALUBSrc),.ALUCtr(ALUCtr),.Branch(Branch),.MemtoReg(MemtoReg),.MemWr(MemWr),.MemOp(MemOp));
+	control_unit cu(.JumpS(jump),.inst(Data_out),.ExtOp(ExtOp),.RegWr(RegWr),.ALUASrc(ALUASrc),.ALUBSrc(ALUBSrc),.ALUCtr(ALUCtr),.Branch(Branch),.MemtoReg(MemtoReg),.MemWr(MemWr),.MemOp(MemOp));
 imm_gen immgen(.inst(Data_out),.ExtOp(ExtOp),.imm(imm));
 reg_file rg(.inst(Data_out),.busW(busW),.RegWr(RegWr),.Wr_Clk(clk),.rs1(rs1),.rs2(rs2));
 mux2x1_1 mu1x2x1(.imm(imm),.PCASRC(PCASRC),.mux_1out(mux_1out));
@@ -47,7 +47,7 @@ mux2x1_3 mu3x2x1(.rs1(rs1),.imm_v(PC),.ALUASrc(ALUASrc),.mux_3out(mux_3out));
 mux3x1_4 mu4x3x1(.rs2(rs2),.imm_v(PC),.ALUBSrc(ALUBSrc),.mux_4out(mux_4out));
 alu alalabilirsen(.rs1(mux_3out),.rs2(mux_4out),.ALUCtr(ALUCtr),.less(less),.zero(zero),.result(result));
 adder add(.mux_1out(mux_1out),.mux_2out(mux_2out),.NextPc(nextPc));
-BranchUnit BU(.Branch(Branch),.Zero(zero),.Less(less),.Jump(jump),.PCASRC(PCASRC),.PCBSRC(PCBSRC));
+	BranchUnit BU(.Branch(Branch),.Zero(zero),.Less(less),.JumpS(jump),.PCASRC(PCASRC),.PCBSRC(PCBSRC));
 ProgramCounter ProgramEater(.NextPc(nextPc),.clk(clk),.PC(PC));
 data_memory datamem(.MemWr(MemWr),.MemOp(MemOp),.clkR(clk),.clkW(clk),.data_mem_address(result),.data_mem_input(rs2),.data_mem_output(data_mem_output));
 lastmux2x1 lastmux(.rslt(result),.DataOut(data_mem_output),.MemtoReg(MemtoReg),.out(busW));
