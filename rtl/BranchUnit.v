@@ -1,28 +1,25 @@
-module Branch_Module(
-input Branch,
+input JumpS,
+input [2:0]Branch,
 input Less,
 input Zero,
-input Jump,	
 output reg PCASRC,
 output reg PCBSRC
 );
 always @(*) begin
-	PCASRC = 0;
-	PCBSRC = 1;
-	if(Branch) begin
-		if(Less) begin
-			PCASRC = 1;
-			PCBSRC = 0;
-		end	
-		else if(Zero) begin
-			PCASRC = 1;
-			PCBSRC = 0;
-		end
-	end
-	else if(Jump) begin
-		PCASRC = 1;
-		PCBSRC = 0;
-	end
+	PCASRC = 1;
+	PCBSRC = 0;
+	case (Branch)
+	   3'b001:if (Zero) PCASRC=0;
+	   3'b010:if (~Zero) PCASRC=0;
+	   3'b011:if (Less) PCASRC=0;
+	   3'b100:if (~Less) PCASRC=0;
+	   3'b101:if (Less) PCASRC=0;
+	   3'b110:if (~Less) PCASRC=0;
+	   3'b111:if (JumpS) PCASRC=0;
+	           else 
+	           begin
+	               PCASRC=0;
+	               PCBSRC=1;
+	           end
+	endcase
 end
-endmodule
-		
