@@ -1,3 +1,4 @@
+module control_unit(
     input [31:0] inst,        
     output reg [2:0] ExtOp,
     output reg RegWr,
@@ -170,3 +171,4 @@
             end
         endcase
     end
+endmodule
