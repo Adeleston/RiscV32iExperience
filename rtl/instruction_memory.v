@@ -1,4 +1,3 @@
-timescale 1ns / 1ps
 module instruction_memory(
     input wire clk, //clock puls
     input wire write_enable, // write to Instruction Memory
