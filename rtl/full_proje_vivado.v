@@ -104,4 +104,10 @@ module testbanch;
     lastmux2x1 last_mux_uut(.rslt(result), 
     .DataOut(data_mem_out), .MemtoReg(MemtoReg), 
     .out(busW));
+    initial begin
+         $monitor("Time: %t | Next PC: %h | Instructions Address: %h | Instructions Out: %h | rs1: %h | rs2: %h | ALU Result: %h",
+            $time, nextPc, instructions_address, instructions_out, rs1, rs2, result);
+        #1000;
+        $finish;
+    end
 endmodule
