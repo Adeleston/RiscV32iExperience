@@ -3,9 +3,9 @@
 `include "Uart.v"
 `include "adder.v"
 `include "alu.v"
-`include "data_memory(2KB).v"
+`include "data_memory.v"
 `include "imm_gen.v"
-`include "instruction_memory(2KB).v"
+`include "instruction_memory.v"
 `include "muxes.v"
 `include "reg_file.v"
 module full_Project(
