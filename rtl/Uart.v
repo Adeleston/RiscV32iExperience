@@ -160,8 +160,8 @@ module uart_system (
     );
 
     always @(posedge clk) begin
-        if (rx_start) begin
-            outsignal <= rx_data;
+        if (tx_start) begin
+            outsignal <= tx_signal;//without start stop bit.
         end
     end
 endmodule
