@@ -22,7 +22,7 @@ module control_unit(
         RegWr = 1'b0;
         ALUASrc = 1'b0;
         ALUBSrc = 2'b00;
-        ALUCtr = 5'b00000;
+        ALUCtr = 4'b0000;
         Branch = 1'b0;
         MemtoReg = 1'b0;
         MemWr = 1'b0;
