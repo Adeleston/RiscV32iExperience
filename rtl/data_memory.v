@@ -1,8 +1,10 @@
+`timescale 1ns / 1ps
 module data_memory(
     input wire MemWr,//Memory write signal
     input wire [2:0] MemOP,//Memory Operations signals for LBU, LB, LH, LHU, LW and S types
     input wire clkR, //clock puls for reading
     input wire clkW, //clock puls to write
+    input wire resetn,
     input wire [31:0] data_mem_address,//Address of data memory
     input wire [31:0] data_mem_input,//Incoming data to memory
     output reg [31:0] data_mem_output//Outcoming data from memory
@@ -14,7 +16,11 @@ module data_memory(
     for (i=0; i<Depth; i=i+1)
         data_mem[i]<=0;
     end
-    always @(posedge clkR)//Clock for reading from memoy
+    always @(posedge clkR or negedge resetn)//Clock for reading from memoy
+        if(!resetn)begin
+        data_mem_output <= 32'h00000000;
+        end
+        else begin
         if (~MemWr)//if write signals is 0
             begin
                 if (MemOP[2]) //If Memory operation's left most significant bit is 1 then Load Word
@@ -50,6 +56,7 @@ module data_memory(
                         end
                 end
             end
+end            
      always @(negedge clkW)//Clock puls for writing to memory
         if (MemWr)// If Memory Write signal is 1
             begin
