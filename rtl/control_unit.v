@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module control_unit(
     input [31:0] inst,        
     output reg [2:0] ExtOp,
@@ -24,7 +25,7 @@ module control_unit(
         ALUBSrc = 2'b00;
         ALUCtr = 4'b0000;
         Branch = 3'b000; // Reset Branch signal to 3 bits
-        MemtoReg = 1'b0;
+        MemtoReg = 1'b1;
         MemWr = 1'b0;
         MemOp = 3'b000;
         JumpS = 1'b0;
@@ -83,6 +84,7 @@ module control_unit(
                 ALUBSrc = 2'b01;
                 MemWr = 1'b1;
                 MemOp = func3;
+                MemtoReg= 1'b0;
                 ExtOp = 3'b001;
                 ALUCtr = 4'b0000; // rs1 + imm
             end
@@ -148,17 +150,3 @@ module control_unit(
             end
 
             default: begin
-                // Default values if no opcode matches
-                RegWr = 1'b0;
-                ALUASrc = 1'b0;
-                ALUBSrc = 2'b00;
-                ALUCtr = 4'b0000;
-                Branch = 3'b000;
-                MemtoReg = 1'b0;
-                MemWr = 1'b0;
-                MemOp = 3'b000;
-                JumpS = 1'b0;
-            end
-        endcase
-    end
-endmodule
