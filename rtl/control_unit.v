@@ -25,7 +25,7 @@ module control_unit(
         ALUBSrc = 2'b00;
         ALUCtr = 4'b0000;
         Branch = 3'b000; // Reset Branch signal to 3 bits
-        MemtoReg = 1'b1;
+        MemtoReg = 1'b0;
         MemWr = 1'b0;
         MemOp = 3'b000;
         JumpS = 1'b0;
