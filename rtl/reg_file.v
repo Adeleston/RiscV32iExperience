@@ -22,7 +22,9 @@ module reg_file(
         if(!resetn)begin
             rs1 <= 32'h00000000;
             rs2 <= 32'h00000000;
-        end 
+        end
+        rs1 <= register[Ra];
+        rs2 <= register[Rb]; 
         Ra = inst[19:15]; 
         Rb = inst[24:20]; 
         Rw = inst[11:7];  
